@@ -1,0 +1,6 @@
+package main
+
+// Project name : {{.ProjectName}}
+func main() {
+
+}
