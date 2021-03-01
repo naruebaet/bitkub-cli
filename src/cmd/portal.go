@@ -100,13 +100,10 @@ func initProject(projectName string) {
 	}
 
 	// swagger init
-	//swag := exec.Command("swag", "init")
-	//swag.Dir = projectName
-	//if out, err := cmd.Output(); err != nil {
-	//	fmt.Println(out)
-	//	log.Fatal("an error from swag init "+projectName, err)
-	//} else {
-	//	fmt.Println(out)
-	//}
+	swag := exec.Command("swag", "init")
+	swag.Dir = projectName
+	if err := swag.Run(); err != nil {
+		log.Fatal("an error from swag init "+projectName, err)
+	}
 
 }
