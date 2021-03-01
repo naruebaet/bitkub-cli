@@ -1,3 +1,6 @@
+package templ
+
+const Mongodb = `
 package drivers
 
 import (
@@ -52,3 +55,5 @@ func MongoConnection() (*mongo.Client, context.Context, error) {
 
 	return client, ctx, err
 }
+
+`

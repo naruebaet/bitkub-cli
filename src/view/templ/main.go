@@ -1,3 +1,6 @@
+package templ
+
+const Main = `
 package main
 import (
 	"os"
@@ -35,3 +38,4 @@ func initViper() {
 	}
 	viper.AutomaticEnv()
 }
+`

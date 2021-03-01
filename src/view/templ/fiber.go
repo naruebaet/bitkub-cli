@@ -1,3 +1,6 @@
+package templ
+
+const Fiber = `
 package routing
 
 import (
@@ -142,3 +145,4 @@ func (m *FiberMiddleware) fiberLogResponse(c *fiber.Ctx) error {
 		}).Infof("Response")
 	return nil
 }
+`
