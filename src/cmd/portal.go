@@ -60,6 +60,7 @@ func initProject(projectName string) {
 		"/model",
 		"/repository",
 		"/pkg/routing",
+		"/pkg/driver",
 		"/service",
 		"/docs",
 	}
@@ -92,6 +93,26 @@ func initProject(projectName string) {
 			"src/view/config.template",
 			MainFile{ProjectName: projectName},
 		},
+		{
+			"pkg/driver/mongodb.go",
+			"src/view/driver/mongodb.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/mysql.go",
+			"src/view/driver/mysql.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/postgres.go",
+			"src/view/driver/postgres.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/redis.go",
+			"src/view/driver/redis.template",
+			MainFile{ProjectName: projectName},
+		},
 	}
 
 	for _, srcFile := range goFile {
@@ -102,8 +123,9 @@ func initProject(projectName string) {
 	// swagger init
 	swag := exec.Command("swag", "init")
 	swag.Dir = projectName
-	if err := swag.Run(); err != nil {
+	if out, err := swag.Output(); err != nil {
 		log.Fatal("an error from swag init "+projectName, err)
+	} else {
+		fmt.Print(string(out))
 	}
-
 }
