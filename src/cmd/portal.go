@@ -3,6 +3,7 @@ package cmd
 import (
 	"bitkub-cli/src/model"
 	"bitkub-cli/src/pkg/util"
+	"bitkub-cli/src/view/templ"
 	"fmt"
 	"github.com/alexflint/go-arg"
 	"log"
@@ -75,49 +76,49 @@ func initProject(projectName string) {
 	goFile := []model.FileWithTemplate{
 		{
 			"main.go",
-			"src/view/main.template",
+			templ.Main,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"pkg/routing/fiber.go",
-			"src/view/fiber.template",
+			templ.Fiber,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"model/response.go",
-			"src/view/response.template",
+			templ.Response,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"config/config.yaml",
-			"src/view/config.template",
+			templ.Config,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"pkg/driver/mongodb.go",
-			"src/view/driver/mongodb.template",
+			templ.Mongodb,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"pkg/driver/mysql.go",
-			"src/view/driver/mysql.template",
+			templ.Mysql,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"pkg/driver/postgres.go",
-			"src/view/driver/postgres.template",
+			templ.Postgres,
 			MainFile{ProjectName: projectName},
 		},
 		{
 			"pkg/driver/redis.go",
-			"src/view/driver/redis.template",
+			templ.Redis,
 			MainFile{ProjectName: projectName},
 		},
 	}
 
 	for _, srcFile := range goFile {
 		log.Println("file created : " + projectName + "/" + srcFile.Filename)
-		util.MkTemplate(projectName+"/"+srcFile.Filename, srcFile.Template, srcFile.Data)
+		util.MkTemplateStr(projectName+"/"+srcFile.Filename, srcFile.Template, srcFile.Data)
 	}
 
 	// swagger init

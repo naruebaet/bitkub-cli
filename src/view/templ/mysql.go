@@ -1,3 +1,6 @@
+package templ
+
+const Mysql = `
 package drivers
 
 import (
@@ -57,3 +60,5 @@ func MySQLWeb() *gorm.DB {
 	)
 	return myConnection(DSN, source, replica)
 }
+
+`

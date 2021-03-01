@@ -1,3 +1,6 @@
+package templ
+
+const Postgres = `
 package drivers
 
 import (
@@ -50,3 +53,5 @@ func PostgresConnection() *gorm.DB {
 
 	return connection(DSN, source, replica)
 }
+
+`

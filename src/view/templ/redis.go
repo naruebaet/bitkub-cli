@@ -1,3 +1,6 @@
+package templ
+
+const Redis = `
 package drivers
 
 import (
@@ -29,3 +32,5 @@ func RedisConnection(db int) *redis.Client {
 
 	return rdb
 }
+
+`

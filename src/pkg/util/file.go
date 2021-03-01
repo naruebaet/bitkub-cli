@@ -16,8 +16,8 @@ func Mkdir(path string, mode os.FileMode) {
 	}
 }
 
-// MkTemplate : make file from template file
-func MkTemplate(filePath, templatePath string, templateValue interface{}) {
+// MkTemplateFile : make file from template file
+func MkTemplateFile(filePath, templatePath string, templateValue interface{}) {
 	// make file
 	f, err := os.Create(filePath)
 	if err != nil {
@@ -32,6 +32,25 @@ func MkTemplate(filePath, templatePath string, templateValue interface{}) {
 		log.Fatal(err)
 		return
 	}
+
+	// add template value
+	err = t.Execute(f, templateValue)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+// MkTemplateStr : make file from template file
+func MkTemplateStr(filePath, templateStr string, templateValue interface{}) {
+	// make file
+	f, err := os.Create(filePath)
+	if err != nil {
+		log.Println("create file: ", err)
+		return
+	}
+	defer f.Close()
+
+	t := template.Must(template.New(filePath).Parse(templateStr))
 
 	// add template value
 	err = t.Execute(f, templateValue)
