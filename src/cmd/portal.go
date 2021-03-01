@@ -6,6 +6,7 @@ import (
 	"bitkub-cli/src/view/templ"
 	"fmt"
 	"github.com/alexflint/go-arg"
+	"github.com/iancoleman/strcase"
 	"log"
 	"os"
 	"os/exec"
@@ -22,6 +23,17 @@ func process(cli model.Cli) {
 	if cli.Init != "" {
 		// do init project
 		initProject(cli.Init)
+	}
+
+	if len(cli.Create) == 2 {
+		switch cli.Create[0] {
+		case "repository":
+			createRepository(cli.Create[1])
+		case "model":
+			createModel(cli.Create[1])
+		case "service":
+			createService(cli.Create[1])
+		}
 	}
 }
 
@@ -130,3 +142,24 @@ func initProject(projectName string) {
 		fmt.Print(string(out))
 	}
 }
+
+type RepoFile struct {
+	RepoName           string
+	RepoNameLowerCamel string
+	RepoNameUpperCamel string
+}
+
+func createRepository(repoName string) {
+	if repoName != "" {
+		log.Println("file created : ")
+		util.MkTemplateStr("repository/"+repoName+".go", templ.Repository, RepoFile{
+			RepoName:           repoName,
+			RepoNameLowerCamel: strcase.ToLowerCamel(repoName),
+			RepoNameUpperCamel: strcase.ToCamel(repoName),
+		})
+	}
+}
+
+func createModel(modelName string) {}
+
+func createService(serviceName string) {}
