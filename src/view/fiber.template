@@ -92,7 +92,7 @@ func (m *FiberMiddleware) InitFiberMiddleware(cacheStorage fiber.Storage) (*fibe
 
 // Healthcheck handler
 // ShowAccount godoc
-// @Success 200 {object} models.BaseResponse{data=bool} "server is ok"
+// @Success 200 {object} model.BaseResponse{data=bool} "server is ok"
 // @Failure default {object} models.BaseErrorResponse{code=int,error=string} "server is not ok"
 // @Router /healthcheck [get]
 func healthcheck(c *fiber.Ctx) error {
