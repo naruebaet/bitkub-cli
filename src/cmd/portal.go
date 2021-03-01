@@ -60,6 +60,7 @@ func initProject(projectName string) {
 		"/model",
 		"/repository",
 		"/pkg/routing",
+		"/pkg/driver",
 		"/service",
 		"/docs",
 	}
@@ -90,6 +91,26 @@ func initProject(projectName string) {
 		{
 			"config/config.yaml",
 			"src/view/config.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/mongodb.go",
+			"src/view/driver/mongodb.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/mysql.go",
+			"src/view/driver/mysql.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/postgres.go",
+			"src/view/driver/postgres.template",
+			MainFile{ProjectName: projectName},
+		},
+		{
+			"pkg/driver/redis.go",
+			"src/view/driver/redis.template",
 			MainFile{ProjectName: projectName},
 		},
 	}
