@@ -1,6 +1,9 @@
 # bitkub-cli
 
-> just go starter cli like repository pattern style
+> just go starter cli like repository pattern style. project build from [GO-Fiber](https://gofiber.io) framework
+
+## Version
+> v1.0.0 alpha
 
 ## Install
 - download
@@ -23,3 +26,6 @@ $ bitkub-cli -i [project name]
 ```
 $ bitkub-cli -c repository [repository name]
 ```
+
+---
+show me the money.
