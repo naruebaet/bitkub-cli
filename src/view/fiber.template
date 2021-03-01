@@ -1,4 +1,5 @@
 package routing
+
 import (
 	"fmt"
 	"{{.ProjectName}}/docs"
@@ -13,18 +14,22 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
+
 var (
 	defaultSkipper = func(c *fiber.Ctx) bool {
 		return strings.Contains(c.Path(), "swagger")
 	}
 )
+
 // FiberSkipper skip next
 type fiberSkipper func(c *fiber.Ctx) bool
+
 // FiberMiddleware init
 type FiberMiddleware struct {
 	Skipper fiberSkipper
 	Config  interface{}
 }
+
 // InitFiber init http fiber
 func InitFiber() *FiberMiddleware {
 	m := &FiberMiddleware{
@@ -81,11 +86,19 @@ func (m *FiberMiddleware) InitFiberMiddleware(cacheStorage fiber.Storage) (*fibe
 		docs.SwaggerInfo.Schemes = []string{"http", "https"}
 		router.Get("/swagger/*", swagger.Handler)
 	}
-	router.Get("/healthcheck", func(c *fiber.Ctx) error {
-		return c.JSON(models.NewBaseResponse(0, true))
-	})
+    router.Get("/healthcheck", healthcheck)
 	return f, router
 }
+
+// Healthcheck handler
+// ShowAccount godoc
+// @Success 200 {object} models.BaseResponse{data=bool} "server is ok"
+// @Failure default {object} models.BaseErrorResponse{code=int,error=string} "server is not ok"
+// @Router /healthcheck [get]
+func healthcheck(c *fiber.Ctx) error {
+	return c.JSON(models.NewBaseResponse(0, true))
+}
+
 func fiberError(code int, f *fiber.Ctx) error {
 	switch code {
 	case 9:
@@ -96,6 +109,7 @@ func fiberError(code int, f *fiber.Ctx) error {
 		return f.Status(code).JSON(models.NewBaseErrorResponse(90, "Internal server error"))
 	}
 }
+
 func (m *FiberMiddleware) fiberLogRequest(c *fiber.Ctx) error {
 	if m.Skipper(c) {
 		return c.Next()
@@ -110,6 +124,7 @@ func (m *FiberMiddleware) fiberLogRequest(c *fiber.Ctx) error {
 		}).Infof("Request")
 	return c.Next()
 }
+
 func (m *FiberMiddleware) fiberLogResponse(c *fiber.Ctx) error {
 	if m.Skipper(c) {
 		return c.Next()
