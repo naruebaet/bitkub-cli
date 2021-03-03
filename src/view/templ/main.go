@@ -16,7 +16,8 @@ func init() {
 
 func main() {
 	var	newFiber  = routing.InitFiber()
-	V1 := router.Group("/v1")
+	f, router := newFiber.InitFiberMiddleware(nil)
+	_ = router.Group("/v1")
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)

@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"os"
+	textTemplate "text/template"
 )
 
 // Mkdir : make dir
@@ -50,7 +51,7 @@ func MkTemplateStr(filePath, templateStr string, templateValue interface{}) {
 	}
 	defer f.Close()
 
-	t := template.Must(template.New(filePath).Parse(templateStr))
+	t := textTemplate.Must(textTemplate.New(filePath).Parse(templateStr))
 
 	// add template value
 	err = t.Execute(f, templateValue)

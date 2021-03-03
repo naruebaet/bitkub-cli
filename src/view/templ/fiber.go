@@ -6,7 +6,7 @@ package routing
 import (
 	"fmt"
 	"{{.ProjectName}}/docs"
-	"{{.ProjectName}}/model"
+	models "{{.ProjectName}}/model"
 	"strings"
 	"time"
 	swagger "github.com/arsmn/fiber-swagger/v2"
