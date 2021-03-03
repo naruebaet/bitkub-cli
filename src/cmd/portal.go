@@ -5,11 +5,12 @@ import (
 	"bitkub-cli/src/pkg/util"
 	"bitkub-cli/src/view/templ"
 	"fmt"
-	"github.com/alexflint/go-arg"
-	"github.com/iancoleman/strcase"
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/alexflint/go-arg"
+	"github.com/iancoleman/strcase"
 )
 
 func Init() {
@@ -69,7 +70,7 @@ func initProject(projectName string) {
 
 	// just path list of project : singular style
 	folder := []string{
-		"/config",
+		"/configs",
 		"/model",
 		"/repository",
 		"/pkg/routing",
@@ -102,7 +103,7 @@ func initProject(projectName string) {
 			MainFile{ProjectName: projectName},
 		},
 		{
-			"config/config.yaml",
+			"configs/config.yaml",
 			templ.Config,
 			MainFile{ProjectName: projectName},
 		},
